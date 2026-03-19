@@ -2365,11 +2365,11 @@
         if (e.target.id === 'infotainment') fadeIn(lateAudio);
         if (e.target.id === 'mobile') fadeIn(rainAudio);
       } else {
-        if (e.target.id === 'infotainment' && currentAudio === lateAudio) fadeOut(lateAudio);
-        if (e.target.id === 'mobile' && currentAudio === rainAudio) fadeOut(rainAudio);
+        if (e.target.id === 'infotainment') fadeOut(lateAudio);
+        if (e.target.id === 'mobile') fadeOut(rainAudio);
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.1 });
 
   document.querySelectorAll('#infotainment, #mobile').forEach(s => musicObserver.observe(s));
 
