@@ -2315,7 +2315,7 @@
   // 뮤트 해제 버튼 UI
   const musicBtn = document.createElement('div');
   musicBtn.id = 'music-btn';
-  musicBtn.innerHTML = '🔇';
+  musicBtn.innerHTML = '🔊';
   musicBtn.style.cssText = `
     position:fixed; bottom:28px; right:28px; z-index:999;
     width:46px; height:46px; border-radius:50%;
@@ -2326,7 +2326,7 @@
   `;
   document.body.appendChild(musicBtn);
 
-  let muted = true;
+  let muted = false;
   let currentAudio = null;
 
   function fadeIn(audio) {
