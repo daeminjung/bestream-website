@@ -2328,12 +2328,28 @@
 
   let muted = false;
   let currentAudio = null;
+  let userInteracted = false;
+
+  // 첫 상호작용 감지 후 재생 허용
+  function onFirstInteraction() {
+    if (userInteracted) return;
+    userInteracted = true;
+    if (currentAudio && !muted) {
+      currentAudio.play().catch(() => {});
+    }
+    document.removeEventListener('click', onFirstInteraction);
+    document.removeEventListener('scroll', onFirstInteraction);
+    document.removeEventListener('keydown', onFirstInteraction);
+  }
+  document.addEventListener('click', onFirstInteraction);
+  document.addEventListener('scroll', onFirstInteraction);
+  document.addEventListener('keydown', onFirstInteraction);
 
   function fadeIn(audio) {
     if (currentAudio && currentAudio !== audio) fadeOut(currentAudio);
     currentAudio = audio;
     musicBtn.style.display = 'flex';
-    if (!muted) {
+    if (!muted && userInteracted) {
       audio.play().catch(()=>{});
       let v = 0;
       const t = setInterval(() => { v = Math.min(v + 0.05, 0.55); audio.volume = v; if(v>=0.55) clearInterval(t); }, 80);
